@@ -15,8 +15,8 @@ let transport = nodemailer.createTransport({
 
 //Message content
 const message = {
-    from: 'alan.hummer@landsend.com', // Sender address
-    to: 'alan.hummer@landsend.com',         // List of recipients
+    from: 'LE.Promo.Error@landsend.com', // Sender address
+    to: 'Ronald.Schmitt@landsend.com;Jeremy.Fredrich@landsend.com;Jessica.Rickard@landsend.com;Robert.Radosevich@landsend.com;Alan.Hummer@landsend.com;Santanu.Mojumder@landsend.com',         // List of recipients
     subject: 'Promo Cache Alert! Alert! Alert!', // Subject line
     text: 'We have a promotion cache problem.  See here: \r\n\r\n_DETAILS_' // Plain text body
 };
