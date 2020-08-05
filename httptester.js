@@ -42,47 +42,47 @@ var config = {
         },
         {
             "servername": "leuspx08:1080",
-            "URI":  "https://leuspx08:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "URI":  "http://leuspx08:1080/api/OfferDetailServlet?promotionSegmentId=null",
             "RunIt": true
         },
         {
             "servername": "leuspx09:1080",
-            "URI":  "https://leuspx09:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "URI":  "http://leuspx09:1080/api/OfferDetailServlet?promotionSegmentId=null",
             "RunIt": true
         },
         {
             "servername": "leuspx10:1080",
-            "URI":  "https://leuspx10:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "URI":  "http://leuspx10:1080/api/OfferDetailServlet?promotionSegmentId=null",
             "RunIt": true
         },
         {
             "servername": "leuspx25:1080",
-            "URI":  "https://leuspx25:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "URI":  "http://leuspx25:1080/api/OfferDetailServlet?promotionSegmentId=null",
             "RunIt": true
         },
         {
             "servername": "leuspx26:1080",
-            "URI":  "https://leuspx26:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "URI":  "http://leuspx26:1080/api/OfferDetailServlet?promotionSegmentId=null",
             "RunIt": true
         },
         {
             "servername": "leuspx27:1080",
-            "URI":  "https://leuspx27:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "URI":  "http://leuspx27:1080/api/OfferDetailServlet?promotionSegmentId=null",
             "RunIt": true
         },
         {
             "servername": "leuspx28:1080",
-            "URI":  "https://leuspx28:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "URI":  "http://leuspx28:1080/api/OfferDetailServlet?promotionSegmentId=null",
             "RunIt": true
         },
         {
             "servername": "leuspx29:1080",
-            "URI":  "https://leuspx29:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "URI":  "http://leuspx29:1080/api/OfferDetailServlet?promotionSegmentId=null",
             "RunIt": true
         },
         {
             "servername": "leuspx30:1080",
-            "URI":  "https://leuspx30:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "URI":  "http://leuspx30:1080/api/OfferDetailServlet?promotionSegmentId=null",
             "RunIt": true
         }
     ],
