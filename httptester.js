@@ -27,39 +27,63 @@ var config = {
     "URLs": [
         {
             "servername": "www.landsend.com",
-            "URI":  "https://www.landsend.com/api/OfferDetailServlet?promotionSegmentId=null"
+            "URI":  "https://www.landsend.com/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": true
         },
         {
             "servername": "orgin-m1-www.landsend.com",
-            "URI":  "https://origin-m1-www.landsend.com/api/OfferDetailServlet?promotionSegmentId=null"
+            "URI":  "https://origin-m1-www.landsend.com/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": true
         },
         {
             "servername": "orgin-d1-www.landsend.com",
-            "URI":  "https://origin-d1-www.landsend.com/api/OfferDetailServlet?promotionSegmentId=null"
+            "URI":  "https://origin-d1-www.landsend.com/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": true
         },
         {
-            "servername": "leuspx01:1080",
-            "URI":  "https://leuspx01:1080/api/OfferDetailServlet?promotionSegmentId=null"
+            "servername": "leuspx08:1080",
+            "URI":  "https://leuspx08:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": false
         },
         {
-            "servername": "leuspx02:1080",
-            "URI":  "https://leuspx02:1080/api/OfferDetailServlet?promotionSegmentId=null"
+            "servername": "leuspx09:1080",
+            "URI":  "https://leuspx09:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": false
         },
         {
-            "servername": "leuspx03:1080",
-            "URI":  "https://leuspx03:1080/api/OfferDetailServlet?promotionSegmentId=null"
+            "servername": "leuspx10:1080",
+            "URI":  "https://leuspx10:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": true
         },
         {
-            "servername": "leuspx21:1080",
-            "URI":  "https://leuspx21:1080/api/OfferDetailServlet?promotionSegmentId=null"
+            "servername": "leuspx25:1080",
+            "URI":  "https://leuspx25:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": false
         },
         {
-            "servername": "leuspx22:1080",
-            "URI":  "https://leuspx22:1080/api/OfferDetailServlet?promotionSegmentId=null"
+            "servername": "leuspx26:1080",
+            "URI":  "https://leuspx26:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": false
         },
         {
-            "servername": "leuspx23:1080",
-            "URI":  "https://leuspx23:1080/api/OfferDetailServlet?promotionSegmentId=null"
+            "servername": "leuspx27:1080",
+            "URI":  "https://leuspx27:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": false
+        },
+        {
+            "servername": "leuspx28:1080",
+            "URI":  "https://leuspx28:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": false
+        },
+        {
+            "servername": "leuspx29:1080",
+            "URI":  "https://leuspx29:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": false
+        },
+        {
+            "servername": "leuspx30:1080",
+            "URI":  "https://leuspx30:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "RunIt": false
         }
     ],
     "HTTPDefaults": {
@@ -87,14 +111,22 @@ function mainThread() {
     ****************/
     //Rip thru each URL, save and compare to the others.
     config.URLs.forEach(function(inputURL) {
-        getURL(inputURL.URI, {})
-        .then(onURLFetchSuccess, function(error) {
-            //Took Error - log it
-            promoArray.push({"url": inputURL.URI, "promo": "", "error":error.status + "=" + error.statusText});
+        if (inputURL.RunIt) {
+            getURL(inputURL.URI, {})
+            .then(onURLFetchSuccess, function(error) {
+                //Took Error - log it
+                promoArray.push({"url": inputURL.URI, "promo": "", "error":error.status + "=" + error.statusText});
+                if (promoArray.length == config.URLs.length) {
+                    checkForProblems(promoArray);
+                }
+            });
+        }
+        else {
+            promoArray.push({"url": inputURL.URI, "promo": "(skipped)", "error": "(none)" });
             if (promoArray.length == config.URLs.length) {
                 checkForProblems(promoArray);
             }
-        });
+        }
     });
 }
 
@@ -127,26 +159,36 @@ function checkForProblems(inputPromoArray) {
 
     var blnError = false;
     var szPromoMessage = "";
-    var savePromo = "Blue";
+    var savePromo = "";
 
     inputPromoArray.forEach(function(promoObject) {
         //Intiialize save value, if not set
-        if (savePromo == "") 
-            savePromo = promoObject.promo;
 
         //See if it is the same
-        if (promoObject.promo != savePromo || promoObject.promo == "" || promoObject.error != "(none)") {
-            //we have a probolem
-            blnError = true;
+        if (promoObject.promo == "(skipped)") {
+            //skip it
         }
         else {
-            //All Good
-        }
-        if (promoObject.error == "(none)") {
-            szPromoMessage = szPromoMessage + "URL: " + promoObject.url + " = " + promoObject.promo + "\r\n";
-        }
-        else {
-            szPromoMessage = szPromoMessage + "URL: " + promoObject.url + " = " + promoObject.promo + " error: " + JSON.parse(JSON.stringify(promoObject.error)) + "\r\n";
+            if (savePromo == "") 
+                savePromo = promoObject.promo;
+       
+            //Now check
+            //console.log("PRMO: " + promoObject.promo + " VS " + savePromo + "ERR:" + promoObject.error);
+            if (promoObject.promo != savePromo || promoObject.promo == "" || promoObject.error != "(none)") {
+                //we have a probolem
+                blnError = true;
+                //console.log("ERROR HERE!");
+            }
+            else {
+                //All Good
+            }
+            if (promoObject.error == "(none)") {
+                szPromoMessage = szPromoMessage + "URL: " + promoObject.url + " = " + promoObject.promo + "\r\n";
+            }
+            else {
+                szPromoMessage = szPromoMessage + "URL: " + promoObject.url + " = " + promoObject.promo + " error: " + JSON.parse(JSON.stringify(promoObject.error)) + "\r\n";
+            }
+            savePromo = promoObject.promo;
         }
 
     });
