@@ -82,7 +82,7 @@ var config = {
         },
         {
             "servername": "leuspx30:1080",
-            "URI":  "http://leuspx30:1080/api/OfferDetailServlet?promotionSegmentId=null",
+            "URI":  "https://leuspx30:1080/api/OfferDetailServlet?promotionSegmentId=null",
             "RunIt": true
         }
     ],
